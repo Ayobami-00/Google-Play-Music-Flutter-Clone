@@ -4,7 +4,7 @@ This repository contains the code for the Google Play Music Flutter Clone which 
 # Licence
 MIT License
 
-Copyright (c) 2018 Aman gautam
+Copyright (c) 2018 Owumi Festus
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
