@@ -196,7 +196,7 @@ class SqlDbClient {
 
 
     //TODO: Documentation required
-    Future<List<Song>> fetchFavouriteSong() async {
+    Future<List<Song>> fetchFavouriteSongs() async {
       List<Map> query = await _database.rawQuery("select * from songs where isFav=1");
       List<Song> songs = List();
       query.forEach((s){
@@ -258,19 +258,6 @@ class SqlDbClient {
     return songs;
   }
 
-
-                                                                 //ARTIST QUERIES//
-  //TODO: Documentation required
-  Future<List<Song>> fetchArtist() async {
-    List<Map> query = await _database.rawQuery("select distinct artist,album,albumArt from songs group by artist order by artist");
-    List<Song> songs = List();
-    query.forEach((s){
-      Song song = Song.fromMap(s);
-      songs.add(song);
-    });
-    return songs;
-  }
-
   //TODO: Documentation required
   Future<List<Song>> fetchRandomAlbum() async {
     List<Map> query = await _database
@@ -282,6 +269,20 @@ class SqlDbClient {
     });
     return songs;
   }
+
+
+                                                                 //ARTIST QUERIES//
+  //TODO: Documentation required
+  Future<List<Song>> fetchArtists() async {
+    List<Map> query = await _database.rawQuery("select distinct artist,album,albumArt from songs group by artist order by artist");
+    List<Song> songs = List();
+    query.forEach((s){
+      Song song = Song.fromMap(s);
+      songs.add(song);
+    });
+    return songs;
+  }
+
 
 
                                                                    //RECENT SONGS QUERIES//
@@ -339,7 +340,7 @@ class SqlDbClient {
   
   
   //TODO: Documentation required
-  Future<int> inserPlaylistSong(Song song, String playlistTitle) async{
+  Future<int> insertPlaylistSong(Song song, String playlistTitle) async{
     int id = 0;
     if(!song.playlistTitile){
       song.playlistTitle = playlistTitle;
