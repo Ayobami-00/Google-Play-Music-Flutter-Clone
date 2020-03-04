@@ -8,7 +8,135 @@ import 'package:flute_music_player/flute_music_player.dart';
 
 
 
-class SqlDbClient {
+
+abstract class SqlDbClient {
+  
+  Database _database;
+  Song song;
+
+  
+  /// This function takes no paramters and creates the database
+  Future createDatabase();
+
+
+  /// This function takes two parameters, one of type Database and another of type int and creates the songs,recent and playlist database
+  Future _create(Database _database, int version);
+
+                                                                      //SONGS QUERIES//
+
+  /// This function takes in a variable of type Song and returns 
+  Future<int> insertSong(Song song);
+
+
+  //TODO: Documentation required
+  Future<int> updateSongList(Song song);
+
+  //TODO: Documentation required
+  Future<bool> isAlreadyLoaded();
+
+  //TODO: Documentation required
+  Future<List<Song>> fetchSongs();
+
+
+  //TODO: Documentation required
+  Future<List<Song>> fetchSongsByArtist(String artist);
+
+  //TODO: Documentation required
+  Future<List<Song>> fetchSongsByGenre(String genre);
+
+   //TODO: Documentation required
+  Future<List<Song>> fetchTopSong();
+
+
+  //TODO: Documentation required
+  Future<int> updateSong(Song song);
+  
+  
+  //TODO: Documentation required
+  Future<bool> isfav(Song song);
+
+   //TODO: Documentation required
+   Future<String> favouriteSong(Song song);
+
+    //TODO: Documentation required
+     Future<Song> fetchLastSong();
+
+
+     Future<List<Song>> fetchLastAddedSongs();
+
+
+    //TODO: Documentation required
+    Future<List<Song>> fetchFavouriteSongs();
+
+    //TODO: Documentation required
+    Future<bool> removeFavSong(Song song);
+
+    //TODO: Documentation required
+    Future<List<Song>> searchSong(String searchString);
+
+
+    //TODO: Documentation required
+    Future<List<Song>> fetchSongById(int id);
+
+
+
+
+
+
+
+                                                                   //ALBUMS QUERIES//
+
+  //TODO: Documentation required
+  Future<List<Song>> fetchAlbum();
+
+  //TODO: Documentation required
+  Future<List<Song>> fetchRandomAlbum();
+
+                                                                 //ARTIST QUERIES//
+  //TODO: Documentation required
+  Future<List<Song>> fetchArtists();
+
+
+                                                                   //RECENT SONGS QUERIES//
+
+  //TODO: Documentation required
+  Future<List<Song>> fetchRecentSongs();
+  
+  //TODO: Documentation required
+  Future<int> insertRecentSong(Song song);
+
+
+   //TODO: Documentation required
+    Future<bool> removeRecentSong(Song song);
+
+    
+
+ 
+
+                                                                //PLAYLIST QUERIES//
+
+
+//TODO: Documentation required
+  Future<List<Song>> fetchPlaylistSongsByPlaylistName(String playlistTitle);
+  
+  
+  //TODO: Documentation required
+  Future<int> insertPlaylistSong(Song song, String playlistTitle);
+
+
+   //TODO: Documentation required
+    Future<bool> removePlaylistSong(Song song);
+
+}
+
+
+
+
+
+
+
+
+class SqlDbClientImpl implements SqlDbClient {
   
   Database _database;
   Song song;
@@ -39,13 +167,13 @@ class SqlDbClient {
 
   /// This function takes in a variable of type Song and returns 
   Future<int> insertSong(Song song) async{
-    if(!song.count){
+    if(song.count == null){
       song.count = 0;
     }
-    if (!song.timestamp){
+    if (song.timestamp == null){
       song.timestamp = 0;
     }
-    if(!song.isFav){
+    if(song.isFav == null){
       song.isFav = 0;
     }
 
@@ -91,7 +219,7 @@ class SqlDbClient {
 
   //TODO: Documentation required
   Future<List<Song>> fetchSongs() async{
-    List<Map> query = await _database.query("songs",columns: Song.Columns,
+    List<Map> query = await _database.query("songs",
     orderBy: "title");
     List<Song> songs = List();
     query.forEach((s){
@@ -104,8 +232,7 @@ class SqlDbClient {
 
   //TODO: Documentation required
   Future<List<Song>> fetchSongsByArtist(String artist) async{
-    List<Map> query = await _database.query("songs",
-        columns: Song.Columns, where: "artist='$artist'");
+    List<Map> query = await _database.query("songs", where: "artist='$artist'");
     List<Song> songs = List();
     query.forEach((s){
       Song song = Song.fromMap(s);
@@ -116,8 +243,7 @@ class SqlDbClient {
 
   //TODO: Documentation required
   Future<List<Song>> fetchSongsByGenre(String genre) async{
-    List<Map> query = await _database.query("songs",
-        columns: Song.Columns, where: "genre='$genre'");
+    List<Map> query = await _database.query("songs", where: "genre='$genre'");
     List<Song> songs = List();
     query.forEach((s){
       Song song = Song.fromMap(s);
@@ -342,7 +468,7 @@ class SqlDbClient {
   //TODO: Documentation required
   Future<int> insertPlaylistSong(Song song, String playlistTitle) async{
     int id = 0;
-    if(!song.playlistTitile){
+    if(song.playlistTitle == null){
       song.playlistTitle = playlistTitle;
     }
     
@@ -363,38 +489,5 @@ class SqlDbClient {
       await _database.rawDelete('DELETE FROM playlist WHERE id = ?', [song.id]);
       return true;
     }
-
-    
-
-
-
-
-
-
-
-     
-
-
-
-
-
-
-
-
-
-  
-
-
-  
-
-
-  
-
-
-  
-
-
-  
-
 
 }

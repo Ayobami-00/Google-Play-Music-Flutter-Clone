@@ -1,14 +1,52 @@
 import 'dart:async';
+import 'package:meta/meta.dart';
 
 
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:google_play_music_flutter_clone/data/database/sql_database_client.dart';
 
-class SongRepository {
-  
-  SqlDbClient sqlDbClient;
+abstract class SongRepository{
 
-  Future insertSongToDatabase(Song song) async {
+  Future<int> insertSongToDatabase(Song song);
+
+  Future<int> updateSongListInDatabase(Song song);
+
+  Future<bool> checkIfSongsAreLoaded(); 
+
+  Future<List<Song>> fetchAllSongs(); 
+
+  Future<List<Song>> fetchSongsByArtist(String artist); 
+
+  Future<List<Song>> fetchSongsByGenre(String genre);
+
+  Future<List<Song>> fetchTopSongs(); 
+
+  Future<int> updateSong(Song song); 
+
+  Future<bool> checkIfASongIsFav(Song song);
+
+  Future<String> makeSongFavourite(Song song);
+
+  Future<Song> fetchLastSong();
+
+  Future<List<Song>> fetchLastAddedSongs();
+
+  Future<List<Song>> fetchFavouriteSongs();
+
+  Future<bool> removeFavSong(Song song); 
+
+  Future<List<Song>> fetchSongById(int id); 
+  
+
+}
+
+class SongRepositoryImpl implements SongRepository{
+  
+  final SqlDbClient sqlDbClient;
+
+  SongRepositoryImpl({@required this.sqlDbClient});
+
+  Future<int> insertSongToDatabase(Song song) async {
     return sqlDbClient.insertSong(song);
   }
 
@@ -18,12 +56,12 @@ class SongRepository {
   }
 
 
-  Future<bool> checkIfSongsAreLoaded(Song song) async {
+  Future<bool> checkIfSongsAreLoaded() async {
     return sqlDbClient.isAlreadyLoaded();
   }
 
 
-  Future<List<Song>> fetchAllSongs(Song song) async {
+  Future<List<Song>> fetchAllSongs() async {
     return sqlDbClient.fetchSongs();
   }
 
@@ -36,7 +74,7 @@ class SongRepository {
     return sqlDbClient.fetchSongsByGenre(genre);
   }
 
-  Future<List<Song>> fetchTopSongs(String genre) async {
+  Future<List<Song>> fetchTopSongs() async {
     return sqlDbClient.fetchTopSong();
   }
 
@@ -44,7 +82,7 @@ class SongRepository {
     return sqlDbClient.updateSong(song);
   }
 
-  Future<bool> checkIFASongIsFav(Song song) async {
+  Future<bool> checkIfASongIsFav(Song song) async {
     return sqlDbClient.isfav(song);
   }
 
