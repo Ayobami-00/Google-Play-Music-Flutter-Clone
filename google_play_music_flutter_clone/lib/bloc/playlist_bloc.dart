@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flute_music_player/flute_music_player.dart';
 import 'package:google_play_music_flutter_clone/bloc/bloc_provider.dart';
 import 'package:google_play_music_flutter_clone/data/database/sql_database_client.dart';
 import 'package:google_play_music_flutter_clone/models/playlist_model.dart';
 import 'package:google_play_music_flutter_clone/repository/playlist_repository.dart';
+import 'package:google_play_music_flutter_clone/utils/flute_music_player.dart';
 import 'package:google_play_music_flutter_clone/utils/song_and_playlist_name.dart';
 import 'package:google_play_music_flutter_clone/utils/title_and_songs.dart';
 

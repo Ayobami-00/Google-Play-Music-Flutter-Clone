@@ -1,4 +1,4 @@
-import 'package:flute_music_player/flute_music_player.dart';
+import 'package:google_play_music_flutter_clone/utils/flute_music_player.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:google_play_music_flutter_clone/data/database/sql_database_client.dart';

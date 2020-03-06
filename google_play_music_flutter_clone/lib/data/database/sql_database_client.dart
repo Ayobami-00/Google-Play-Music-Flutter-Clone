@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:google_play_music_flutter_clone/models/playlist_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:flute_music_player/flute_music_player.dart';
+import 'package:google_play_music_flutter_clone/utils/flute_music_player.dart';
 
 abstract class SqlDbClient {
   Database _database;
@@ -14,9 +13,6 @@ abstract class SqlDbClient {
 
   /// This function takes no paramters and creates the database
   Future createDatabase();
-
-  /// This function takes two parameters, one of type Database and another of type int and creates the songs,recent and playlist database
-  Future _create(Database _database, int version);
 
   //SONGS QUERIES//
 
