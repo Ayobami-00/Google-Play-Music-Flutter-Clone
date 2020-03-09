@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_play_music_flutter_clone/ui/pages/playlists.dart';
 import 'package:google_play_music_flutter_clone/ui/views/now_playing.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage>
                 child: TabBarView(
                   controller: controller,
                   children: <Widget>[
-                    Text("Tab 1"),
+                    PlaylistsPage(),
                     Text("Tab 2"),
                     Text("Tab 3"),
                     Text("Tab 3"),

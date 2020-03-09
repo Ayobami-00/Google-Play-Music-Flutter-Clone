@@ -106,7 +106,7 @@ abstract class SqlDbClient {
   Future<bool> removePlaylistSong(Song song);
 }
 
-class SqlDbClientImpl implements SqlDbClient {
+class SqlDbClientImpl {
   Database _database;
   Song song;
 
