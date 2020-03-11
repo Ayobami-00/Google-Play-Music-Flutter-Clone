@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_play_music_flutter_clone/ui/views/card_view.dart';
-import 'package:google_play_music_flutter_clone/utils/flute_music_player.dart';
+import 'package:flute_music_player/flute_music_player.dart';
 
 class PlaylistsPage extends StatefulWidget {
   @override

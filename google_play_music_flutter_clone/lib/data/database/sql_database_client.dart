@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flute_music_player/flute_music_player.dart';
 import 'package:google_play_music_flutter_clone/models/playlist_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:google_play_music_flutter_clone/utils/flute_music_player.dart';
 
 abstract class SqlDbClient {
   Database _database;
@@ -106,7 +106,7 @@ abstract class SqlDbClient {
   Future<bool> removePlaylistSong(Song song);
 }
 
-class SqlDbClientImpl {
+class SqlDbClientImpl implements SqlDbClient{
   Database _database;
   Song song;
 

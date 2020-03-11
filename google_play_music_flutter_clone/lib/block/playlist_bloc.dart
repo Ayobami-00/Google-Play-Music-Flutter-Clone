@@ -8,10 +8,11 @@
 // import 'package:google_play_music_flutter_clone/utils/song_and_playlist_name.dart';
 // import 'package:google_play_music_flutter_clone/utils/title_and_songs.dart';
 
+// SqlDbClientImpl sqlDbClient = SqlDbClientImpl();
 
 // class PlayListBloc implements BlocBase{
 
-//   static SqlDbClient sqlDbClient;
+  
 //   final _repository  = PlaylistRepositoryImpl(sqlDbClient: sqlDbClient);
 //   final _addPlaylistDetailsController = StreamController<PlayListDetails>.broadcast();
 //   final _removePlaylistDetailsController = StreamController<PlayListDetails>.broadcast();

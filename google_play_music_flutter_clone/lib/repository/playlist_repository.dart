@@ -3,7 +3,7 @@ import 'package:google_play_music_flutter_clone/models/playlist_model.dart';
 import 'package:meta/meta.dart';
 
 
-import 'package:google_play_music_flutter_clone/utils/flute_music_player.dart';
+import 'package:flute_music_player/flute_music_player.dart';
 import 'package:google_play_music_flutter_clone/data/database/sql_database_client.dart';
 
 abstract class PlaylistRepository {
