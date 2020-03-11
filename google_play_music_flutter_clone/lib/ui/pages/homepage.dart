@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_play_music_flutter_clone/ui/pages/playlists.dart';
 import 'package:google_play_music_flutter_clone/ui/views/now_playing.dart';
+import 'package:google_play_music_flutter_clone/ui/pages/songs.dart';
+import 'package:google_play_music_flutter_clone/bloc/songs_bloc/bloc/songs_bloc.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,7 +53,9 @@ class _HomePageState extends State<HomePage>
                     PlaylistsPage(),
                     Text("Tab 2"),
                     Text("Tab 3"),
-                    Text("Tab 3"),
+                    BlocProvider(
+                    create: (context) => SongsBloc(),
+                    child: SongsPage()),
                     Text("Tab 3"),
                   ],
                 ),
