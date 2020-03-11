@@ -17,19 +17,17 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
 
   SplashScreenBloc();
   @override
-  SplashScreenState get initialState => Empty();
+  SplashScreenState get initialState => DatabaseLoading();
 
   @override
   Stream<SplashScreenState> mapEventToState(
     SplashScreenEvent event,
   ) async* {
-    yield DatabaseLoading();
     if (event is CreateDbAndLoadSongsIfNotAlreadyLoaded) {
       await createRepository.createDatabase();
       if (await songRepository.checkIfSongsAreLoaded()) {
         print('Songs are already loaded');
-        yield DatabaseLoaded();
-
+        yield DatabaseLoaded(message: 'updating changes...');
       } else {
         var all_songs;
         
@@ -45,7 +43,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
             for (Song song in list) {
               await songRepository.insertSongToDatabase(song);
             }
-            yield DatabaseLoaded();
+            yield DatabaseLoaded(message: 'loading songs...');
             print('Songs are already inserted');
           }
         } catch (e) {

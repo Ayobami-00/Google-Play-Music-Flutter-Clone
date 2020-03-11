@@ -426,6 +426,8 @@ class SqlDbClientImpl implements SqlDbClient{
     } else {
       await _database.update("playlistDetails", playlistDetail.toMap(),
           where: "playlistName= ?", whereArgs: [playlistDetail.playlistName]);
+      await _database.update("playlistDetails", playlistDetail.toMap(),
+          where: "playlistName= ?", whereArgs: [playlistDetail.description]);
     }
 
     return id;

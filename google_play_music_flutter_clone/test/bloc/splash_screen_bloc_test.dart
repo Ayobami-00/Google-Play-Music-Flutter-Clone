@@ -16,7 +16,7 @@
 
 //   SplashScreenBloc splashScreenBloc;
 //   CreateRepositoryImpl createRepositoryImpl;
-//   SongRepositoryImpl songRepositoryImpl
+//   SongRepositoryImpl songRepositoryImpl;
 //   MockSqlDbClient mockSqlDbClient;
 
 
@@ -28,7 +28,7 @@
 //   createRepositoryImpl = CreateRepositoryImpl(sqlDbClient: mockSqlDbClient);
 //   songRepositoryImpl = SongRepositoryImpl(sqlDbClient: mockSqlDbClient);
 
-//     splashScreenBloc =  SplashScreenBloc(createRepositoryImpl,songRepositoryImpl);
+//     splashScreenBloc =  SplashScreenBloc();
 // });
 
 //   test('initialState should be Empty', () {
@@ -43,9 +43,9 @@
 //       () async {
 //         // arrange
 
-//         when(mockCreateRepository.createDatabase())
+//         when(await createRepositoryImpl.createDatabase())
 //             .thenAnswer(null);
-//         when(mockSongsRepository.checkIfSongsAreLoaded())
+//         when(await songRepositoryImpl.checkIfSongsAreLoaded())
 //             .thenAnswer(null);
 //         // assert later
 //         final expected = [

@@ -4,10 +4,6 @@ abstract class SplashScreenState extends Equatable {
   const SplashScreenState();
 }
 
-class Empty extends SplashScreenState {
-  @override
-  List<Object> get props => [];
-}
 
 class DatabaseLoading extends SplashScreenState {
   @override
@@ -15,8 +11,11 @@ class DatabaseLoading extends SplashScreenState {
 }
 
 class DatabaseLoaded extends SplashScreenState {
+  final String message;
+
+  DatabaseLoaded({this.message});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message];
 }
 
 class NoMusicFound extends SplashScreenState {
