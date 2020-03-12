@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_play_music_flutter_clone/bloc/artists_bloc/bloc/artists_bloc.dart';
+import 'package:google_play_music_flutter_clone/ui/pages/artist.dart';
 import 'package:google_play_music_flutter_clone/ui/pages/playlists.dart';
 import 'package:google_play_music_flutter_clone/ui/views/now_playing.dart';
 import 'package:google_play_music_flutter_clone/ui/pages/songs.dart';
@@ -53,7 +55,9 @@ class _HomePageState extends State<HomePage>
                   controller: controller,
                   children: <Widget>[
                     PlaylistsPage(),
-                    Text("Tab 2"),
+                    BlocProvider(
+                    create: (context) => ArtistsBloc(),
+                    child: ArtistsPage()),
                     BlocProvider(
                     create: (context) => AlbumsBloc(),
                     child: AlbumsPage()),

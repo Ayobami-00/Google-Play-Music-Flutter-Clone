@@ -1,38 +1,34 @@
-import 'dart:io';
-
 import 'package:flute_music_player/flute_music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_play_music_flutter_clone/bloc/albums_bloc.dart/bloc/albums_bloc.dart';
+import 'package:google_play_music_flutter_clone/bloc/artists_bloc/bloc/artists_bloc.dart';
 import 'package:google_play_music_flutter_clone/ui/views/card_view.dart';
 import 'package:google_play_music_flutter_clone/ui/views/loading.dart';
 
-class AlbumsPage extends StatefulWidget {
+class ArtistsPage extends StatefulWidget {
   @override
-  _AlbumsPageState createState() => _AlbumsPageState();
+  _ArtistsPageState createState() => _ArtistsPageState();
 }
 
-class _AlbumsPageState extends State<AlbumsPage> {
+class _ArtistsPageState extends State<ArtistsPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Immediately trigger the event
-    BlocProvider.of<AlbumsBloc>(context).add(LoadAlbums());
+    BlocProvider.of<ArtistsBloc>(context).add(LoadArtists());
   }
-
- 
-
+  
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AlbumsBloc, AlbumsState>(
+    return BlocListener<ArtistsBloc, ArtistsState>(
       listener: (context, state) {},
-      child: BlocBuilder<AlbumsBloc, AlbumsState>(
+      child: BlocBuilder<ArtistsBloc, ArtistsState>(
         builder: (context, state) {
-          if (state is AlbumsInitial) {
+          if (state is ArtistsInitial) {
             return Container(
               height: MediaQuery.of(context).size.height,
               child: Loading(),
             );
-          } else if (state is NoAlbumsAvailable) {
+          } else if (state is NoArtistsAvailable) {
             return Container(
                 height: MediaQuery.of(context).size.height,
                 child: Center(
@@ -43,20 +39,20 @@ class _AlbumsPageState extends State<AlbumsPage> {
                       fontWeight: FontWeight.bold,
                       fontSize: 30.0),
                 )));
-          } else if (state is AlbumsLoaded) {
-            List<Song> albums = state.allAlbumsList;
+          } else if (state is ArtistsLoaded) {
+            List<Song> artists = state.allArtistsList;
             return Container(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10.0,10.0,10.0,75.0),
                 child: GridView.builder(
-                  itemCount: albums.length,
+                  itemCount: artists.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 1.5,
                       mainAxisSpacing: 1.5,
-                      childAspectRatio: 0.7),
+                      childAspectRatio: 1.3),
                   itemBuilder: (BuildContext context, int index) {
-                    return CardView(albums: albums,index: index);
+                    return CardView(albums: artists,index: index);
                   },
                 ),
               ),
